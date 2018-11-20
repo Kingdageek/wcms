@@ -7,7 +7,6 @@ span.invalid-feedback {
     height: 100%;
 }
 body {
-   overflow: hidden; 
    margin: 0;
    background: #fcfcfc;
    font-family: Montserrat;
@@ -95,6 +94,19 @@ input, button, textarea {
     height: 100%;
     display: none;
 }
+/* =================== REPORT HOUSE STYLING =============================== */
+.lm-show {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    display:none;
+ }
+ #report {
+     text-transform: uppercase;
+     font-weight: 600;
+ }
 /* ======================== ADD ADMIN PAGE STYLING ====================== */
 .form-house {
     width: 45%;
@@ -115,14 +127,18 @@ input[type=submit] {
     text-transform: uppercase;
 }
 input[type=text], 
-input[type=password]{
+input[type=password],
+input[type=email],
+input[type=phone] {
     color: #444;
     border: 2px solid #e5e5e5;
     background: #e5e5e5;
     font-weight: bold;
 }
 input[type=text]:focus, 
-input[type=password]:focus {
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=phone]:focus {
     background: rgb(250, 255, 189);
     color: #000;
 }
