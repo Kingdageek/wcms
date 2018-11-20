@@ -1,12 +1,6 @@
 
 <div class="form-house">
     <h4 class="text-center">Add A New CMS Admin</h4>
-    <!-- <div id="report-house" class="alert alert-danger" style="display:none">
-        <span id="report"></span>
-        <button type="button" class="close" aria-label="Close" id="close-rpt">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> -->
     <form action="javascript:ad_sub_ajax()" class="form-group" method="post" id="admin_form">
         <label for="username" class="mt-2">Admin Username</label>
         <input type="text" id="username" name="username" focus class="form-control" autocomplete='off' autofocus>
