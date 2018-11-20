@@ -6,14 +6,6 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <a class="nav-item nav-link active sl" href="<?=URLROOT;?>">View All Members</a>
-                  <!-- <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=save_member">Save Member Details</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=manage_workers">Manage Workers</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=follow_match">Follow-Up Match</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=save_newcomer">Save Newcomers Details</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=send_sms">Send SMS</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=send_sms_to_select">Send SMS To Selected</a>
-                  <a class="nav-item nav-link sl" href="<?=URLROOT;?>?page=add_admin">Add New Admin</a>
-                  <a class="nav-item nav-link sl" href="logout.php">Logout (<?= $username;?>)</a> -->
                   <a class="nav-item nav-link sl" href="<?=URLROOT;?>/save_member">Save Member Details</a>
                   <a class="nav-item nav-link sl" href="<?=URLROOT;?>/manage_workers">Manage Workers</a>
                   <a class="nav-item nav-link sl" href="<?=URLROOT;?>/follow_match">Follow-Up Match</a>
