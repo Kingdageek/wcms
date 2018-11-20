@@ -1,12 +1,12 @@
 
 <div class="form-house">
     <h4 class="text-center">Add A New CMS Admin</h4>
-    <div id="report-house" class="alert alert-danger" style="display:none">
+    <!-- <div id="report-house" class="alert alert-danger" style="display:none">
         <span id="report"></span>
         <button type="button" class="close" aria-label="Close" id="close-rpt">
             <span aria-hidden="true">&times;</span>
         </button>
-    </div>
+    </div> -->
     <form action="javascript:ad_sub_ajax()" class="form-group" method="post" id="admin_form">
         <label for="username" class="mt-2">Admin Username</label>
         <input type="text" id="username" name="username" focus class="form-control" autocomplete='off' autofocus>
@@ -22,9 +22,6 @@
 </div>
 
 <script>
-   $('#close-rpt').on('click', function() {
-       $('#report-house').fadeOut();
-   });
    function ad_sub_ajax () {
       const submitBtn = document.querySelector("input[type='submit']")
       submitBtn.value = "please wait..."
@@ -39,11 +36,11 @@
 
         if (username === "" || password === "" || cpassword === "") {
             $("#report").text("Please leave no field empty!");
-            $("#report-house").fadeIn();
+            $("#report-house").removeClass('alert-success').addClass('alert-danger').fadeIn();
             element.value = "save admin";
             return;
         }
-        debugger;
+        // debugger;
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest()
         } else {
@@ -73,7 +70,7 @@
                     $('#report-house').removeClass("alert-danger").addClass("alert-success").fadeIn();
                 } else if (xrt === "empty") {
                     $('#report').text("Please leave no field empty")
-                    $("#report-house").fadeIn();
+                    $("#report-house").removeClass('alert-success').addClass('alert-danger').fadeIn();
                 } else if (xrt === "aa") {
                     $('#ureport').text('* Admin username already exists!');
                     $('#cpreport').text('');
