@@ -34,12 +34,15 @@ class Database {
         }
     }
 
-    // method to prepare query
     public function query($sql) {
+        /*
+        * Creates Prepared Statements
+        */
         $this->stmt = $this->dbh->prepare($sql);
     }
-    // method to bind the named parameters to values
+    
     public function bind($param, $value, $type = null) {
+        // method to bind the named parameters to values
         if (is_null($type)) {
             switch (true) {
                 case is_int($value):
@@ -60,12 +63,13 @@ class Database {
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    // method to execute the query
     public function execute() {
+        // method to execute the query
         $this->stmt->execute();
     }
-    // method to return a result set
+
     public function resultSet() {
+        // method to return a result set
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -76,14 +80,22 @@ class Database {
         return $this->stmt->fetchColumn($offset);
     }
 
-    // method to return a single row/record
     public function single() {
+        // method to return a single row/record
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
-    // method to return the row count of returned result
+    
     public function rowCount() {
+        // method to return the row count of returned result
         return $this->stmt->rowCount();
+    }
+
+    public function lastId() {
+        /*
+        * Returns the last Inserted Id in database table
+        */
+        return $this->dbh->lastInsertId();
     }
 }
 
