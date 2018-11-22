@@ -65,13 +65,13 @@
 				VALUES ({$values})";
 
 		// To avoid unneccessary errors
-		if ($stmt = $conn->prepare($sql)) {
+		if ($stmt = $conn->query($sql)) {
 			// loop to bind Values
 			foreach ($fields as $key => $value) {
-				$stmt->bindValue(":".$key, $value);
+				$conn->bind(":".$key, $value);
 			}
 			
-			return ($stmt->execute()) ? $conn->lastInsertId() : false;
+			return ($conn->execute()) ? $conn->lastId() : false;
 		} else {
 			die("Something went horribly wrong. We've notified our engineers");
 		}
@@ -91,13 +91,13 @@
 			$i++;
 		}
 		$sql = "UPDATE {$table} SET {$columns} WHERE user_id = $user_id";
-		if ($stmt = $this->pdo->prepare($sql)) {
+		if ($stmt = $conn->query($sql)) {
 			// To Bind Values
 			foreach ($fields as $key => $value) {
-				$stmt->bindValue(":".$key, $value);
+				$conn->bind(":".$key, $value);
 			}
 			// Execute 
-			$stmt->execute();
+			$conn->execute();
 		}
 		// var_dump($sql);
 	}
