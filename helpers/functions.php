@@ -52,7 +52,55 @@
         $value = stripslashes($value);
         $value = htmlspecialchars($value, ENT_QUOTES, "utf-8");
         return $value;
-    }
+	}
+	
+	function create(Database $conn, String $table, Array $fields=array())
+	{
+		// More generalized than insertUserData
+		// Code reuse is made much possible
+
+		$columns = implode(",", array_keys($fields));
+		$values = ":".implode(", :", array_keys($fields));
+		$sql = "INSERT INTO {$table} ({$columns})
+				VALUES ({$values})";
+
+		// To avoid unneccessary errors
+		if ($stmt = $conn->prepare($sql)) {
+			// loop to bind Values
+			foreach ($fields as $key => $value) {
+				$stmt->bindValue(":".$key, $value);
+			}
+			
+			return ($stmt->execute()) ? $conn->lastInsertId() : false;
+		} else {
+			die("Something went horribly wrong. We've notified our engineers");
+		}
+	}
+
+	function update(Database $conn, String $table, int $user_id, Array $fields= [])
+	{
+		$columns = ""; // to store long sql prepare syntax query for columns
+		$i = 1;
+
+		// looping through fields array to generate columns string
+		foreach ($fields as $key => $value) {
+			$columns .= "{$key} = :{$key}";
+			if ($i < count($fields)) {
+				$columns .= ", ";
+			}
+			$i++;
+		}
+		$sql = "UPDATE {$table} SET {$columns} WHERE user_id = $user_id";
+		if ($stmt = $this->pdo->prepare($sql)) {
+			// To Bind Values
+			foreach ($fields as $key => $value) {
+				$stmt->bindValue(":".$key, $value);
+			}
+			// Execute 
+			$stmt->execute();
+		}
+		// var_dump($sql);
+	}
 
 	function redirect ($location)
 	{
