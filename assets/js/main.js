@@ -4,8 +4,12 @@ $(".sl").on('click', function() {
     $('.ajload').show();
 });
 
-$('#close-rpt').on('click', function() {
-    $('#report-house').fadeOut();
+$('#dismiss').on('click', function() {
+    $('#report-house').addClass("fadeOutDown")
+            .fadeOut(1500, function() {
+                $(this).removeClass("fadeOutDown")
+            }
+    );
 });
 
 function leaderBoxJs() {
