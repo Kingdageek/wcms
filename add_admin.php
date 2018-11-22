@@ -40,13 +40,10 @@
         } else {
             xhr = new ActiveXObject("Microsoft.XMLHTTP")
         }
-
-        // const data = `data=${username}/${password}/${cpassword}`
         const data = `data=${username}/${password}/${cpassword}`
         xhr.open("POST", "ajax/admin_register.php", true)
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-        xhr.send(data)
-        
+        xhr.send(data)       
 
         xhr.onreadystatechange = function () {
 
