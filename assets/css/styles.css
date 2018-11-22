@@ -102,10 +102,20 @@ input, button, textarea {
     margin: 0;
     width: 100%;
     display:none;
+    font-weight: 600;
  }
  #report {
      text-transform: uppercase;
-     font-weight: 600;
+ }
+ #dismiss {
+    width:30px; 
+    height:30px; 
+    padding: .375rem .75rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    margin-left: 4rem;
+    cursor: pointer;
  }
 /* ======================== ADD ADMIN PAGE STYLING ====================== */
 .form-house {
