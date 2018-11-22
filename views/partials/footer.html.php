@@ -5,7 +5,7 @@
         </div>
         <div id="report-house" class="alert alert-danger text-center lm-show animated fadeInUp">
             <span id="report"></span>
-            <!-- <span id="close-rpt">&times;</span> -->
+            <span id="dismiss" title="Dismiss this alert">&times;</span>
         </div>
     </div>    
 <!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
