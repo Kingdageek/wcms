@@ -113,7 +113,7 @@
 
 	function displayPage($url)
     {
-        $url = htmlspecialchars($url, ENT_QUOTES,  'UTF-8');
+        $url = checkInput($url);
         $routes = require_once "routes.php";
         if (array_key_exists($url, $routes)) {
             include_once $routes[$url];
