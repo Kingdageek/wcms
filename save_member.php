@@ -35,7 +35,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="phone">Phone <sup>*</sup></label>
-                            <input type="phone" class="form-control" id="phone" placeholder="08129551799" name="phone" pattern=".{11,11}">
+                            <input type="phone" class="form-control" id="phone" placeholder="08129551799" name="phone" pattern=".{11,11}" title="Please enter 11-digit phone number">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Email">Email</label>
@@ -64,15 +64,15 @@
                         <div class="form-group col-md-4">
                             <label for="gender">Gender <sup>*</sup></label>
                             <select id="gender" class="form-control">
-                                <option selected>Choose...</option>
+                                <option value="" selected>Choose...</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="arange">Age Range <sup>*</sup></label>
-                            <select id="arange" class="form-control">
-                                <option selected>Choose...</option>
+                            <label for="agerange">Age Range <sup>*</sup></label>
+                            <select id="agerange" class="form-control">
+                                <option value="" selected>Choose...</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -80,7 +80,7 @@
                         <div class="form-group col-md-4">
                             <label for="isworker">Is Member a Worker <sup>*</sup></label>
                             <select id="isworker" class="form-control" onchange="leaderBoxJs()">
-                                <option selected>Choose...</option>
+                                <option value="" selected>Choose...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -94,7 +94,7 @@
                         <div class="form-group col-md-4">
                             <label for="isaffu">Is Worker currently available for follow-up</label>
                             <select id="isaffu" class="form-control">
-                                <option selected>Choose...</option>
+                                <option value="" selected>Choose...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -102,7 +102,7 @@
                         <div class="form-group col-md-4">
                             <label for="isleader">Is Worker a Leader</label>
                             <select id="isleader" class="form-control">
-                                <option selected>Choose...</option>
+                                <option value= "" selected>Choose...</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -122,3 +122,74 @@
         </div>
     </div>
 </div>
+<script>
+function saveMember() {
+    // Collect all values 
+    // debugger
+    let fname = $("#fname").val().trim()
+    let lname = $("#lname").val().trim()
+    let oname = $("#oname").val().trim()
+    let nbs = $("#nbs").val().trim()
+    let gender = $("#gender").val()
+    let occupation = $("#occupation").val().trim()
+    let town = $("#town").val().trim()
+    let isworker = $("#isworker").val()
+    let isleader = $("#isleader").val()
+    let agerange = $("#agerange").val()
+    let department = $("#department").val().trim()
+    let isaffu = $("#isaffu").val()
+    let phone = $("#phone").val().trim()
+    let email = $("#email").val().trim()
+    let address = $("#address").val().trim()
+
+    if (fname == "" || lname == "" || phone == "" || address == "" || nbs == "" || 
+            town == "" || gender == "" || agerange == "" || isworker == "")
+    {
+        $("#report").text("Please fill all compulsory fields!")
+    } else if (isworker == "Yes" && (department == "" || isaffu == "" || isleader == "")) {
+        $("#report").text("The department, Follow-up Availability and Leader Fields are compulsory if member is a worker")
+    } else {
+        $.post(
+            "ajax/saveMember.php",
+            {
+                fname: fname,
+                lname: lname,
+                oname: oname,
+                nbs: nbs,
+                gender: gender,
+                occupation: occupation,
+                town: town,
+                isleader: isleader,
+                isworker: isworker,
+                agerange: agerange,
+                department: department,
+                isaffu: isaffu,
+                phone: phone,
+                email: email,
+                address: address
+            }, 
+            function (data) {
+                // debugger
+                if (data == "empty") {
+                    $("#report").text("Please fill all compulsory fields!")
+                } else if (data == "workerEmpty") {
+                    $("#report").text("The department, Follow-up Availability and Leader Fields are compulsory if member is a worker")
+                } else if (data == "emailErr") {
+                    $("#report").text("Please enter a valid email address!")
+                } else if (data == "phoneExists") {
+                    $("#report").text("That phone number already belongs to another member!")
+                } else if (data == "emailExists") {
+                    $("#report").text("That email already belongs to another member!")
+                } else if (data == "OK") {
+                    $("#report").text("Member details saved successfully")
+                    $("#report-house").removeClass('alert-danger').addClass('alert-success').fadeIn()
+                    return
+                } else {
+                    alert("Check for errors my dear :D")
+                }
+            }
+        );
+    }
+    $("#report-house").removeClass('alert-success').addClass('alert-danger').fadeIn()
+}
+</script>
