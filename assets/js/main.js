@@ -17,6 +17,9 @@ function leaderBoxJs() {
     if (isworker == "Yes") {
         $("#leader-box").fadeIn();
     } else if (isworker == "No") {
+        $("#department").val("")
+        $("#isaffu").val("")
+        $("#isleader").val("")
         $("#leader-box").fadeOut();
     }
 }
