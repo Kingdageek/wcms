@@ -65,16 +65,13 @@
 				VALUES ({$values})";
 
 		// To avoid unneccessary errors
-		if ($stmt = $conn->query($sql)) {
-			// loop to bind Values
-			foreach ($fields as $key => $value) {
-				$conn->bind(":".$key, $value);
-			}
-			
-			return ($conn->execute()) ? $conn->lastId() : false;
-		} else {
-			die("Something went horribly wrong. We've notified our engineers");
+		$conn->query($sql);
+		// loop to bind Values
+		foreach ($fields as $key => $value) {
+			$conn->bind(":".$key, $value);
 		}
+		
+		return ($conn->execute()) ? $conn->lastId() : false;
 	}
 
 	function update(Database $conn, String $table, int $user_id, Array $fields= [])
@@ -91,18 +88,36 @@
 			$i++;
 		}
 		$sql = "UPDATE {$table} SET {$columns} WHERE user_id = $user_id";
-		if ($stmt = $conn->query($sql)) {
-			// To Bind Values
-			foreach ($fields as $key => $value) {
-				$conn->bind(":".$key, $value);
-			}
-			// Execute 
-			$conn->execute();
+		$conn->query($sql);
+		// To Bind Values
+		foreach ($fields as $key => $value) {
+			$conn->bind(":".$key, $value);
 		}
-		// var_dump($sql);
+		// Execute 
+		$conn->execute();
+	// var_dump($sql);
+	}
+
+	function returnDuplicate(Database $conn, String $table, String $column, String $value)
+	{
+		// Returns true if there are duplicates in the db $table OR false otherwise
+		$sql = "SELECT `$column` FROM `$table` WHERE `$column`='{$value}'";
+		$conn->query($sql);
+		return (!empty($conn->single()->phone) ? true : false);
 	}
 
 	function redirect ($location)
 	{
 		header("location:".$location);
 	}
+
+	function displayPage($url)
+    {
+        $url = htmlspecialchars($url, ENT_QUOTES,  'UTF-8');
+        $routes = require_once "routes.php";
+        if (array_key_exists($url, $routes)) {
+            include_once $routes[$url];
+        } else {
+            echo "Page not found! I want to believe you're not messing with my url on purpose Zig!";
+        }
+    }
