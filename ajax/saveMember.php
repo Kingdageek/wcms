@@ -4,6 +4,9 @@ include_once "ajax_bootstrap.php";
 $conn = new Database;
 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 $data = $_POST;
+$data = array_map( function($value) {
+            return ucwords($value);
+        }, $data); 
 
 // Validations 
 
