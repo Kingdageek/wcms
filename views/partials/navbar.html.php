@@ -1,6 +1,6 @@
         <header>
           <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-              <a class="navbar-brand sl" href="<?=URLROOT;?>"><img src="assets/images/wccrm-logo-2.jpg" alt=""> Watchman CMS</a>
+              <a class="navbar-brand sl" href="<?=URLROOT;?>"><img src="<?=URLROOT;?>/assets/images/wccrm-logo-2.jpg" alt=""> Watchman CMS</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
