@@ -6,7 +6,7 @@ ob_start();
         <!-- ====================== INDIVIDUAL MEMBERS FORM HTML CODE =================== -->
 
        
-                <form action="javascript:saveMember()" method="post">
+                <form action="javascript:storeNewcomer()" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="fname">First Name <sup>*</sup></label>
@@ -60,19 +60,66 @@ ob_start();
                         </div>
                         <div class="form-group col-md-4">
                             <label for="agerange">Age Range <sup>*</sup></label>
-                            <select id="agerange" class="form-control">
+                            <select id="agerange" class="form-control" name="agerange">
                                 <option value="" selected>Choose...</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Below 15">Below 15</option>
+                                <option value="15-18">15-18</option>
+                                <option value="15-18">15-18</option>
+                                <option value="19-25">19-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36-45">36-45</option>
+                                <option value="Above 45">Above 45</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="isworker">Is Member a Worker <sup>*</sup></label>
-                            <select id="isworker" class="form-control" onchange="leaderBoxJs()">
-                                <option value="" selected>Choose...</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
+                            <label for="currentchurch">Current Church <sup>*</sup></label>
+                            <input type="text" name="currentchurch" id="currentchurch" required class="form-control">
+                        </div>                  
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <div>
+                                <label for="">Days available in the house <sup>*</sup> (Tick as many that applies)</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Sun" value="Sunday"> Sunday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Mon" value="Monday"> Monday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Tues" value="Tuesday"> Tuesday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Wed" value="Wednesday"> Wednesday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Thurs" value="Thursday"> Thursday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Fri" value="Friday"> Friday
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="Sat" value="Saturday"> Saturday
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="time">Time(s) <sup>*</sup></label>
+                            <input type="text" name="time" id="time" required class="form-control" placeholder="4pm (weekends)">
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,7 +132,12 @@ ob_start()
 ?>       
 
         <!-- ===================== UPLOAD CSV FILE HTML CODE ============================== -->
+        <?php print_r($_FILES) ;?>
                 Upload CSV file
+        <form action="" method="POST" enctype="multipart/form-data">
+            <input type="file" name="csv" id="csv">
+            <input type="submit" value="Upload file" onclick='alert($("#csv").val())'>
+        </form>
 <?php 
 $file = ob_get_clean();
 include_once "views/formlayout.html.php";
