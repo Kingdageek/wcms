@@ -73,8 +73,12 @@
                             <label for="agerange">Age Range <sup>*</sup></label>
                             <select id="agerange" class="form-control">
                                 <option value="" selected>Choose...</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Below 15">Below 15</option>
+                                <option value="15-19">15-19</option>
+                                <option value="20-25">20-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36-45">36-45</option>
+                                <option value="Above 45">Above 45</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
