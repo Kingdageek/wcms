@@ -22,11 +22,11 @@ if (empty($data['fname']) || empty($data['lname']) || empty($data['gender']) ||
 } elseif (!empty($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL))
 {
     echo "emailErr";
-} elseif (returnDuplicate($conn, 'members', 'phone', $data['phone']))
+} elseif (duplicateExists($conn, 'members', 'phone', $data['phone']))
 {
     echo "phoneExists";
 }
-elseif (!empty($data['email']) && returnDuplicate($conn, 'members', 'email', $data['email'])) {
+elseif (!empty($data['email']) && duplicateExists($conn, 'members', 'email', $data['email'])) {
     echo "emailExists";
 }
 else 
