@@ -1,22 +1,10 @@
-<div class="container">
-    <div class="text-center text-success alert-info p-3">
-        <h4>SAVE MEMBER DETAILS</h4>
-        <hr>
-        <p style="margin:0;">* Click on <strong>Form</strong> below to enter the details of members one at a time <strong>OR</strong> Click on <strong>File</strong> to upload <strong>CSV</strong> file containing member details and have the system save them all automatically.</p>
-    </div>
-    <!-- bootstrap 4 tabs -->
-    <nav class="nav nav-tabs text-center" id="myTab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-form" role="tab" aria-controls="nav-home" aria-selected="true" title="Enter details of member directly">Form</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-file" role="tab" aria-controls="nav-profile" aria-selected="false" title="Upload CSV file containing member details">File</a>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
+<?php 
+$person = 'member';
+ob_start(); 
+?>
 
         <!-- ====================== INDIVIDUAL MEMBERS FORM HTML CODE =================== -->
-
-        <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;">
-                <p><strong><small>Fields marked with <strong><sup>*</sup></strong> are mandatory.</small></strong></p>
+        
                 <form action="javascript:saveMember()" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -116,16 +104,17 @@
                         <button type="submit" class="btn btn-primary" style="width:100%; margin-left:0; font-size:18px">SAVE DETAILS</button>
                     </div>
                 </form>
-            </div>
-        </div>
+<?php 
+$form = ob_get_clean();
+ob_start()
+?>       
 
         <!-- ===================== UPLOAD CSV FILE HTML CODE ============================== -->
-
-        <div class="tab-pane fade" id="nav-file" role="tabpanel" aria-labelledby="nav-profile-tab">
-            Upload CSV file
-        </div>
-    </div>
-</div>
+                Upload CSV file
+<?php 
+$file = ob_get_clean();
+include_once "views/formlayout.html.php";
+?>   
 <script>
 function saveMember() {
     // Collect all values 
