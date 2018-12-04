@@ -64,7 +64,6 @@ ob_start();
                                 <option value="" selected>Choose...</option>
                                 <option value="Below 15">Below 15</option>
                                 <option value="15-18">15-18</option>
-                                <option value="15-18">15-18</option>
                                 <option value="19-25">19-25</option>
                                 <option value="26-35">26-35</option>
                                 <option value="36-45">36-45</option>
@@ -119,7 +118,7 @@ ob_start();
                         </div>
                         <div class="form-group col-md-4">
                             <label for="time">Time(s) <sup>*</sup></label>
-                            <input type="text" name="time" id="time" required class="form-control" placeholder="4pm (weekends)">
+                            <input type="text" name="timeavailable" id="timeavailable" required class="form-control" placeholder="4pm (weekends)">
                         </div>
                     </div>
                     <div class="form-group">
@@ -143,9 +142,9 @@ $file = ob_get_clean();
 include_once "views/formlayout.html.php";
 ?>      
 <script>
-function saveMember() {
+function storeNewcomer() {
     // Collect all values 
-    // debugger
+    debugger
     let fname = $("#fname").val().trim()
     let lname = $("#lname").val().trim()
     let oname = $("#oname").val().trim()
@@ -153,24 +152,21 @@ function saveMember() {
     let gender = $("#gender").val()
     let occupation = $("#occupation").val().trim()
     let town = $("#town").val().trim()
-    let isworker = $("#isworker").val()
-    let isleader = $("#isleader").val()
+    let timeavailable = $("#timeavailable").val().trim()
+    let currentchurch = $("#currentchurch").val().trim()
     let agerange = $("#agerange").val()
-    let department = $("#department").val().trim()
-    let isaffu = $("#isaffu").val()
+    let daysavailable = getCheckboxValueByClass("form-check-input")
     let phone = $("#phone").val().trim()
     let email = $("#email").val().trim()
     let address = $("#address").val().trim()
 
     if (fname == "" || lname == "" || phone == "" || address == "" || nbs == "" || 
-            town == "" || gender == "" || agerange == "" || isworker == "")
+            town == "" || gender == "" || agerange == "" || daysavailable == "" || timeavailable == "" || currentchurch == "")
     {
         $("#report").text("Please fill all compulsory fields!")
-    } else if (isworker == "Yes" && (department == "" || isaffu == "" || isleader == "")) {
-        $("#report").text("The department, Follow-up Availability and Leader Fields are compulsory if member is a worker")
     } else {
         $.post(
-            "ajax/saveMember.php",
+            "ajax/saveNewcomer.php",
             {
                 fname: fname,
                 lname: lname,
@@ -179,29 +175,26 @@ function saveMember() {
                 gender: gender,
                 occupation: occupation,
                 town: town,
-                isleader: isleader,
-                isworker: isworker,
+                timeavailable: timeavailable,
+                daysavailable: daysavailable,
                 agerange: agerange,
-                department: department,
-                isaffu: isaffu,
+                currentchurch: currentchurch,
                 phone: phone,
                 email: email,
                 address: address
             }, 
             function (data) {
-                // debugger
+                debugger
                 if (data == "empty") {
                     $("#report").text("Please fill all compulsory fields!")
-                } else if (data == "workerEmpty") {
-                    $("#report").text("The department, Follow-up Availability and Leader Fields are compulsory if member is a worker")
                 } else if (data == "emailErr") {
                     $("#report").text("Please enter a valid email address!")
                 } else if (data == "phoneExists") {
-                    $("#report").text("That phone number already belongs to another member!")
+                    $("#report").text("That phone number already belongs to another newcomer!")
                 } else if (data == "emailExists") {
-                    $("#report").text("That email already belongs to another member!")
+                    $("#report").text("That email already belongs to another newcomer!")
                 } else if (data == "OK") {
-                    $("#report").text("Member details saved successfully")
+                    $("#report").text("Newcomer details saved successfully")
                     $("#report-house").removeClass('alert-danger').addClass('alert-success').fadeIn()
                     return
                 } else {
@@ -211,5 +204,18 @@ function saveMember() {
         );
     }
     $("#report-house").removeClass('alert-success').addClass('alert-danger').fadeIn()
+}
+
+function getCheckboxValueByClass (className)
+{
+    let chkArray = []
+    // Look for checkboxes with a class, "className", and check if it was checked
+    $("." + className + ":checked").each(function()
+    {
+        chkArray.push($(this).val())
+    })
+    // Join the array separated by a comma
+    let selected = chkArray.join(', ')
+    return selected
 }
 </script>
