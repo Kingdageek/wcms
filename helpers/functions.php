@@ -98,7 +98,7 @@
 	// var_dump($sql);
 	}
 
-	function returnDuplicate(Database $conn, String $table, String $column, String $value)
+	function duplicateExists (Database $conn, String $table, String $column, String $value)
 	{
 		// Returns true if there are duplicates in the db $table OR false otherwise
 		$sql = "SELECT `$column` FROM `$table` WHERE `$column`='{$value}'";
@@ -111,7 +111,7 @@
 		header("location:".$location);
 	}
 
-	function displayPage($url)
+	function displayPage ($url)
     {
         $url = checkInput($url);
         $routes = require_once "routes.php";
@@ -120,4 +120,20 @@
         } else {
             echo "Page not found! I want to believe you're not messing with my url on purpose Zig!";
         }
-    }
+	}
+	
+	function getTime ()
+	{
+		$na = date("D");
+		$day = date("d");
+		$month = date("M");
+		$year = "20".date("y");
+
+		$hour = date("h");
+		$sec = date("s");
+		$min = date("i");
+		$stuff = date("a");
+
+		$time = "$na, $month $day, $year $hour:$min:$sec $stuff";
+		return $time;
+	}
