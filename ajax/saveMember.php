@@ -7,6 +7,7 @@ $data = $_POST;
 $data = array_map( function($value) {
             return ucwords($value);
         }, $data); 
+$data['date'] = getTime(); 
 
 // Validations 
 
