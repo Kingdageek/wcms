@@ -53,8 +53,8 @@ ob_start();
                             <label for="gender">Gender <sup>*</sup></label>
                             <select id="gender" class="form-control">
                                 <option value="" selected>Choose...</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
