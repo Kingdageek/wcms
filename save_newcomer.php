@@ -131,12 +131,14 @@ ob_start()
 ?>       
 
         <!-- ===================== UPLOAD CSV FILE HTML CODE ============================== -->
-        <?php print_r($_FILES) ;?>
-                Upload CSV file
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="file" name="csv" id="csv">
-            <input type="submit" value="Upload file" onclick='alert($("#csv").val())'>
-        </form>
+        <div class="form-row">
+            <div class="col-md-8 form-group p-2">
+                <form action="javascript:uploadCSV()" id="uploadForm" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="csv" id="csv">
+                    <input type="submit" value="Upload file" class="btn btn-success">
+                </form>
+            </div>
+        </div>
 <?php 
 $file = ob_get_clean();
 include_once "views/formlayout.html.php";
@@ -217,5 +219,26 @@ function getCheckboxValueByClass (className)
     // Join the array separated by a comma
     let selected = chkArray.join(', ')
     return selected
+}
+
+function uploadCSV ()
+{
+    $.ajax({
+        url: 'ajax/saveMultiple.php',
+        type: 'POST',
+        data: new FormData($("#uploadForm")),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+            if (data == "invalid") {
+                $("#report").text("Enter a valid file format!")
+            }
+        }
+        error: function (e) {
+            alert(e)
+        }
+    })
+    $("#report-house").removeClass('alert-success').addClass('alert-danger').fadeIn()
 }
 </script>
