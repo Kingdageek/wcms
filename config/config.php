@@ -6,3 +6,4 @@
     define("DB_USER", "root");
     define("DB_PASSWORD", "");
     define("URLROOT", "http://localhost/wcms");
+    define("UPLOAD_PATH", "http://localhost/wcms/uploads/");
